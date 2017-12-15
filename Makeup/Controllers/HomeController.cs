@@ -15,15 +15,14 @@ namespace Makeup.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "This web app lets you to create brands and add their products.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            
             return View();
         }
     }
