@@ -23,6 +23,10 @@ namespace Makeup.Controllers
         // GET: Brand/Details/5
         public ActionResult Details(int? id)
         {
+            if(!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +42,10 @@ namespace Makeup.Controllers
         // GET: Brand/Create
         public ActionResult Create()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
@@ -48,6 +56,10 @@ namespace Makeup.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Descript,Addrs")] Brand brand)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (ModelState.IsValid)
             {
                 makeupModel.Brands.Add(brand);
@@ -61,6 +73,10 @@ namespace Makeup.Controllers
         // GET: Brand/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +96,10 @@ namespace Makeup.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Descript,Addrs")] Brand brand)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (ModelState.IsValid)
             {
                 makeupModel.Entry(brand).State = EntityState.Modified;
@@ -92,6 +112,10 @@ namespace Makeup.Controllers
         // GET: Brand/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +133,10 @@ namespace Makeup.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             Brand brand = makeupModel.Brands.Find(id);
             makeupModel.Brands.Remove(brand);
             makeupModel.SaveChanges();
